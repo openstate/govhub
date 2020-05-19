@@ -1,5 +1,4 @@
 @startuml
-title System overview
 
 cloud "Third-party oAuth provider" as oauth_external {
     [Github] as oauth_github
@@ -33,7 +32,7 @@ node "www.govhub.nl" {
 } 
 
 node "community.govhub.nl" {
-    [Discourse docker] as docker_discourse
+    [Discourse] as docker_discourse
 }
 
 node "git.govhub.nl" as git {
