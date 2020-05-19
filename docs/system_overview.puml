@@ -1,0 +1,61 @@
+@startuml
+title System overview
+
+cloud "Third-party oAuth provider" as oauth_external {
+    [Github] as oauth_github
+    [Google] as google_github
+}
+note left of oauth_external
+    Can be extended with "Sign in with
+    Apple" via oAuth wrapper:
+    github.com/search?q=oauth2+apple
+end note
+
+cloud "External API" as external_api {
+    [Per API\n- API endpoint's\n- OpenAPI Specification\n- Other documentation links]
+}
+
+node "sso.govhub.nl" {
+    component [oAuth consumer] as oauth_consumer
+    component [oAuth provider\nfor govhub services] as oauth_provider
+}
+note left of oauth_provider
+    This can accept all requests
+end note
+ 
+node "www.govhub.nl" {
+    [PWA for searching API's & code] as docker_search
+    [Periodic link checker] as link_checker
+    database "Postgres" {
+        [Link status &\nAPI uptime] as link_status
+        [Build status] as build_status
+    }
+} 
+
+node "community.govhub.nl" {
+    [Discourse docker] as docker_discourse
+}
+
+node "git.govhub.nl" as git {
+    [Gitlab/Gitea/...] as docker_git
+}
+
+cloud "External git" as git_external {
+    [Github] as git_github
+    [Logius private Gitlab's] as git_gitlab
+}
+
+link_checker .up.> external_api
+link_checker --> docker_git
+link_checker .. link_status
+docker_search .. link_status
+docker_search .. build_status
+git_external .. docker_git: mirror
+docker_git -- oauth_provider
+docker_discourse -- oauth_provider
+oauth_consumer -- oauth_provider
+oauth_consumer .up. oauth_external
+docker_search <--> docker_git
+docker_search --> docker_discourse
+
+@enduml
