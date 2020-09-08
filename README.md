@@ -2,7 +2,7 @@
 
 This project now realizes its work with https://developer.overheid.nl (DON). Reason: why create another place to support co-creation? Let's co-create in an existing and well known project such as DON.
 
-So visit https://gitlab.com/commonground/developer.overheid.nl to see the results of this initiave.
+So visit https://gitlab.com/commonground/developer.overheid.nl to see the results of this initiative.
 
 # GovHub
 
