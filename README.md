@@ -1,3 +1,9 @@
+Important notice!
+
+This project now realizes its work with developer.overheid.nl Reasons: why create another place to support co-creation, let's co-create in an existing and well known project such as DON.
+
+So visit https://gitlab.com/commonground/developer.overheid.nl to see the results of this initive
+
 # GovHub
 
 ## System overview
